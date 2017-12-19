@@ -2,24 +2,27 @@ console.log('js sourced');
 var clicks = 0;
 $(document).ready(function() { //wil run when DOM is loaded
 $('#generate').on('click', append);//append text with button
-$('#body').on('click', toggle());
+$('body').on('click', '.swap', toggleClass);
+$('body').on('click', '.delete' ,removeDiv);
 });//end ready function
 
 
-
-//delete button should remove container and contents
 function append(){
-  $('body').append('<div id ="div"></div');//append div
+  var $div = $('<div class= "red"></div');
   clicks++;
-  $('#div').append('<p id="ptag"></p>');//append <p>
-  $('#ptag').text(clicks);//append click count to DOM as text
+  console.log(clicks);
+  $div.append('<p class ="ptag">' + clicks + '</p>');//append <p> anf click count to DOM
   //append two buttons to div
-  $('#div').append('<button id="swap" type="button">Swap</button>');
-  $('#div').append('<button id="delete" type="button">Delete</button>');
+  $div.append('<button class="swap" type="button">Swap</button>');
+  $div.append('<button class="delete" type="button">Delete</button>');
+  $('body').append($div);
 }//end append function
-//generate button to have red background color
+//generate button to have red background color (done in CSS)
 //swap button should change to yellow background color use toggle()
- function toggle() {
-   $('#swap').css("background-color:", "yellow");
-   $('#generate').css("backgroun-color:", "red");
- }//end toggle function
+function toggleClass(){
+    $(this).parent().toggleClass('yellow');
+}//end toggle colors fuction
+//delete button should remove container and contents
+function removeDiv(){
+  $(this).parent().remove();
+} //end remove div
